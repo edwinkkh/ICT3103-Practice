@@ -21,7 +21,7 @@ pipeline {
 			junit testResults: 'logs/unitreport.xml'
 			recordIssues( 
 				enabledForFailure: true, aggregatingResults: true, 
-    			tools: [php(), checkStyle(pattern: 'checkstyle-result.xml', reportEncoding: 'UTF-8')]
+    			tools: [php()]
 			)
 		}
 	}
