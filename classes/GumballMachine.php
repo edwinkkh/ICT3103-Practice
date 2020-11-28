@@ -16,6 +16,7 @@ class GumballMachine
     {
         $name = "edwin";
         $name = 123;
+        $name ="blah";
         echo $name;
 
         $this->gumballs = $amount;
