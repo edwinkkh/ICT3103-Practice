@@ -17,7 +17,7 @@ pipeline {
 		}
 		stage('Check style'){
 			steps {
-				sh './vendor/bin/phpcs --report=xml --report-file=checkstyle.xml . --ignore=vendor'
+				sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
 			}
 		}
 	}
