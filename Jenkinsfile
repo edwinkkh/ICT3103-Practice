@@ -1,12 +1,13 @@
 pipeline {
 	agent none
 	stages {
-		agent {
-			docker {
-				image 'composer:latest'
-			}
-		}
 		stage('Test application') {
+			agent {
+				docker {
+					image 'composer:latest'
+				}
+			}
+			
 			steps {
 				sh 'composer install'
 			}
@@ -33,7 +34,7 @@ pipeline {
 				}	
 			}
 		}
-		
+
 		stage('Run sonar qube'){
 			agent {
 				docker {
