@@ -1,9 +1,5 @@
 pipeline {
-	agent {
-		docker {
-			image 'composer:latest'
-		}
-	}
+  	agent { dockerfile true }
 	stages {
 		stage('Build') {
 			steps {
@@ -21,11 +17,6 @@ pipeline {
 			}
 		}
 		stage('Run sonar qube'){
-			agent {
-				docker { 
-					image 'maven' 
-				}
-			}
 			steps {
 				script {
 					def scannerHome = tool 'SonarQube';
