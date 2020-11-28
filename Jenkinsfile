@@ -7,19 +7,13 @@ pipeline {
 					image 'composer:latest'
 				}
 			}
-			
+
 			steps {
 				sh 'composer install'
-			}
-
-			steps {
-                sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
-            }
-
-			steps {
+				sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
 				sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
 			}
-
+			
 			post {
 				always {
 					junit testResults: 'logs/unitreport.xml'
