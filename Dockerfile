@@ -6,6 +6,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update 
 RUN apt-get install -y --fix-missing
+RUN apt-get clean
 RUN apt-get install -y default-jre
 RUN apt-get install -y install default-jdk
 
