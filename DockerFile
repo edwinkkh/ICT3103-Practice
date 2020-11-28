@@ -1,5 +1,5 @@
   
-FROM php:7.4
+FROM composer:latest
 
 RUN apt-get update 
 RUN apt-get install -y 
