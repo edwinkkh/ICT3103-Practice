@@ -19,6 +19,7 @@ pipeline {
 			}
 		}
 		stage('Run sonar qube'){
+			agent any
 			steps {
 				script {
 					def scannerHome = tool 'SonarQube';
