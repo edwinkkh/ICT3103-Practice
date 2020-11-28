@@ -2,7 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 
-require 'src/GumballMachine.php';
+require 'classes/GumballMachine.php';
+use Classes\GumballMachine;
 
 class GumballMachineTest extends TestCase
 {
