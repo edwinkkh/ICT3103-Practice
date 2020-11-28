@@ -21,7 +21,7 @@ pipeline {
 			junit testResults: 'logs/unitreport.xml'
 			recordIssues( 
 				enabledForFailure: true, aggregatingResults: true, 
-    			tools: [php()]
+    			tools: [php(), phpStan()	]
 			)
 		}
 	}
