@@ -21,7 +21,11 @@ pipeline {
 			}
 		}
 		stage('Run sonar qube'){
-			docker { image 'maven' }
+			agent {
+				docker { 
+					image 'maven' 
+				}
+			}
 			steps {
 				script {
 					def scannerHome = tool 'SonarQube';
