@@ -1,10 +1,6 @@
   
 FROM composer:latest
 
-RUN apt-get update 
-RUN apt-get install -y openjdk-8-jdk && \
-    apt-get install -y ant && \
+RUN apt-get update && \
+    apt-get install -y openjdk-11-jre-headless && \
     apt-get clean;
-
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
