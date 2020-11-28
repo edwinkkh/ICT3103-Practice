@@ -33,5 +33,21 @@ pipeline {
 			}
 		}
 	}
-	
+  	post {
+		always {
+			junit testResults: 'logs/unitreport.xml'
+			recordIssues( 
+				enabledForFailure: true,
+    			tool: php()
+			)
+			recordIssues(
+				enabledForFailure: true,
+				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
+			)
+			recordIssues(
+				enabledForFailure: true, 
+				tool: sonarQube()
+			)
+		}
+	}
 }
