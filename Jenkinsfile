@@ -25,7 +25,7 @@ pipeline {
 			)
 			recordIssues(
 				enabledForFailure: true,
-				tool: phpStan(pattern: 'style.xml')
+				tool: phpCodeSniffer(pattern: 'style.xml')
 			)
 		}
 	}
