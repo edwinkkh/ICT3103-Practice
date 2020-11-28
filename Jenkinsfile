@@ -1,25 +1,45 @@
 pipeline {
-	agent {
-		dockerfile true
-	}
+	agent none
 	stages {
-		stage('Build') {
+		agent {
+			docker {
+				image 'composer:latest'
+			}
+		}
+		stage('Test application') {
 			steps {
 				sh 'composer install'
 			}
-		}
-		stage('Test') {
+
 			steps {
                 sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
             }
-		}
-		stage('Check style'){
+
 			steps {
 				sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
 			}
+
+			post {
+				always {
+					junit testResults: 'logs/unitreport.xml'
+					recordIssues( 
+						enabledForFailure: true,
+						tool: php()
+					)
+					recordIssues(
+						enabledForFailure: true,
+						tool: phpCodeSniffer(pattern: 'checkstyle.xml')
+					)
+				}	
+			}
 		}
+		
 		stage('Run sonar qube'){
-			agent any
+			agent {
+				docker {
+					image 'maven'
+				}
+			}
 			steps {
 				script {
 					def scannerHome = tool 'SonarQube';
@@ -32,23 +52,14 @@ pipeline {
 					}
 				}
 			}
-		}
-	}
-  	post {
-		always {
-			junit testResults: 'logs/unitreport.xml'
-			recordIssues( 
-				enabledForFailure: true,
-    			tool: php()
-			)
-			recordIssues(
-				enabledForFailure: true,
-				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
-			)
-			recordIssues(
-				enabledForFailure: true, 
-				tool: sonarQube()
-			)
+			post {
+				always {
+					recordIssues(
+						enabledForFailure: true, 
+						tool: sonarQube()
+					)
+				}
+			}
 		}
 	}
 }
