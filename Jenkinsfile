@@ -20,8 +20,12 @@ pipeline {
 		always {
 			junit testResults: 'logs/unitreport.xml'
 			recordIssues( 
-				enabledForFailure: true, aggregatingResults: true, 
-    			tools: [php(), phpStan(pattern: 'style.xml')]
+				enabledForFailure: true,
+    			tool: php()
+			)
+			recordIssues(
+				enabledForFailure: true,
+				tool: phpStan(pattern: 'style.xml')
 			)
 		}
 	}
