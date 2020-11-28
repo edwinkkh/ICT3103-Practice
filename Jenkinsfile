@@ -15,6 +15,11 @@ pipeline {
                 sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
             }
 		}
+		stage('Check style'){
+			steps {
+				sh './vendor/bin/phpcs --report=xml --report-file=checkstyle.xml . --ignore=vendor'
+			}
+		}
 	}
 	post {
 		always {
@@ -25,7 +30,7 @@ pipeline {
 			)
 			recordIssues(
 				enabledForFailure: true,
-				tool: phpCodeSniffer(pattern: 'style.xml')
+				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
 			)
 		}
 	}
