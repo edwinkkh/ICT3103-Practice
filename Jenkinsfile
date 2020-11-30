@@ -43,7 +43,7 @@ pipeline {
 					 	-Dsonar.projectKey=TestProject \
 						-Dsonar.sources=. \
 						-Dsonar.report.export.path=.scannerwork/sonar-report.json \
-						-Dsonar.host.url=http://192.168.1.173:9000 \
+						-Dsonar.host.url=http://192.168.1.163:9000 \
 						-Dsonar.login=05d5a294057ad394670a801269e469d7540dcfce"
 					}
 				}
