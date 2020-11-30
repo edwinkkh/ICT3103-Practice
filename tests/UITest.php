@@ -1,6 +1,7 @@
 
 <?php
 
+use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\WebDriverBy;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -12,19 +13,24 @@ class UITest extends TestCase
 
     // chrome driver
     // https://www.lambdatest.com/blog/selenium-php-tutorial/
-    protected $host = ' http://localhost:4444/wd/hub';
+    protected $host = 'http://192.168.1.163:4444/wd/hub';
     protected $driver;
 
     public function setup(): void
     {
 
-        $this->driver = RemoteWebDriver::create($this->host, DesiredCapabilities::chrome());
+        $capabilities = DesiredCapabilities::chrome();
+        $capabilities->setCapability('chromeOptions', ['args' => ['--headless', '--no-sandbox', '--disable-dev-shm-usage']]);
+
+        $this->driver = RemoteWebDriver::create($this->host, $capabilities );
     }
 
     public function testLoginSuccess()
     {
         // browse to the website
-        $this->driver->get('http://localhost');
+        $this->driver->get('http://192.168.1.163');
+
+        sleep(1);
 
         // enter fields
         $this->driver->findElement(WebDriverBy::id('email'))->sendKeys("user@example.com");
