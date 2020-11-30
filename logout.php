@@ -1,10 +1,7 @@
-<?php 
-	session_start();
+<?php
 
-	$_SESSION = array();
-
-	session_destroy();
-
-	header('location:index.php?logout=true');
-	exit;
-?>
+session_start();
+$_SESSION = array();
+session_destroy();
+header('location:index.php?logout=true');
+exit();

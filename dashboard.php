@@ -1,12 +1,11 @@
-<?php 
-	session_start();
-		
-	if(!isset($_SESSION['user_id']))
-	{
-		header('location:index.php');
-		exit;
-	}
-	
+<?php
+    session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('location:index.php');
+    exit;
+}
+
 
 ?>
 
@@ -18,11 +17,11 @@
 </head>
 
 <body>
-	<div class="container-dashboard">
-		Welcome to the dashboard! <span class="user-name"><?php echo ucwords($_SESSION['first_name'])?> <?php echo ucwords($_SESSION['last_name']);?> </span> 
-		<br>
-		
-		<a href="logout.php?logout=true" class="logout-link">Logout</a>
-	</div>
+    <div class="container-dashboard">
+        Welcome to the dashboard! <span class="user-name"><?php echo ucwords($_SESSION['first_name'])?> <?php echo ucwords($_SESSION['last_name']);?> </span> 
+        <br>
+        
+        <a href="logout.php?logout=true" class="logout-link">Logout</a>
+    </div>
 </body>
 </html>
