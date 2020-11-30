@@ -13,6 +13,7 @@
     <exclude-pattern>*/migrations/*</exclude-pattern>
     <exclude-pattern>*/tests/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/.scannerwork/*</exclude-pattern>
 
     <!-- ignore warnings and display ERRORS only -->
     <arg value="np"/>
