@@ -55,14 +55,14 @@
 		<form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
 			<div class="field-container">
 				<label>Email</label>
-				<input type="email" name="email" required placeholder="Enter Your Email">
+				<input type="email" name="email" required placeholder="Enter Your Email" id="email">
 			</div>
 			<div class="field-container">
 				<label>Password</label>
-				<input type="password" name="password" required placeholder="Enter Your Password">
+				<input type="password" name="password" required placeholder="Enter Your Password" id="password">
 			</div>
 			<div class="field-container">
-				<button type="submit" name="submit">Submit</button>
+				<button type="submit" name="submit" id="submit">Submit</button>
 			</div>
 			
 		</form>

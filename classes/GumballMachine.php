@@ -14,11 +14,6 @@ class GumballMachine
 
     public function setGumballs($amount)
     {
-        $name = "edwin";
-        $name = 123;
-        $name ="blah";
-        echo $name;
-
         $this->gumballs = $amount;
     }
 
