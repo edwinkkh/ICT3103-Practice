@@ -12,7 +12,7 @@ class UITest extends TestCase
 
     // chrome driver
     // https://www.lambdatest.com/blog/selenium-php-tutorial/
-    protected $host = 'http://localhost:9515';
+    protected $host = ' http://localhost:4444/wd/hub';
     protected $driver;
 
     public function setup(): void
@@ -24,7 +24,7 @@ class UITest extends TestCase
     public function testLoginSuccess()
     {
         // browse to the website
-        $this->driver->get('http://ict3103-practice.test');
+        $this->driver->get('http://localhost');
 
         // enter fields
         $this->driver->findElement(WebDriverBy::id('email'))->sendKeys("user@example.com");
