@@ -36,7 +36,7 @@ pipeline {
 				}
 			}
 			steps {
-				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
+				dependencyCheck additionalArguments: '--format HTML --suppression suppression.xml --format XML', odcInstallation: 'Default'
 			}
 			post {
 				success {
