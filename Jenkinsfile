@@ -1,34 +1,47 @@
 pipeline {
 	agent none
 	stages {
-		stage('Test application') {
+		// stage('Test application') {
+		// 	agent {
+		// 		docker {
+		// 			image 'composer:latest'
+		// 		}
+		// 	}
+
+		// 	steps {
+		// 		sh 'composer install'
+		// 		sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
+		// 		sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
+		// 	}
+
+		// 	post {
+		// 		always {
+		// 			junit testResults: 'logs/unitreport.xml'
+		// 			recordIssues( 
+		// 				enabledForFailure: true,
+		// 				tool: php()
+		// 			)
+		// 			recordIssues(
+		// 				enabledForFailure: true,
+		// 				tool: phpCodeSniffer(pattern: 'checkstyle.xml')
+		// 			)
+		// 		}	
+		// 	}
+		// }
+
+		stage("Run dependency check") {
 			agent {
 				docker {
-					image 'composer:latest'
+					image 'maven'
 				}
 			}
-
 			steps {
-				sh 'composer install'
-				sh './vendor/bin/phpunit tests --log-junit logs/unitreport.xml -c tests/phpunit.xml tests'
-				sh './vendor/bin/phpcs --report=checkstyle --report-file=checkstyle.xml . --ignore=vendor'
+				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
 			}
-
 			post {
-				always {
-					junit testResults: 'logs/unitreport.xml'
-					recordIssues( 
-						enabledForFailure: true,
-						tool: php()
-					)
-					recordIssues(
-						enabledForFailure: true,
-						tool: phpCodeSniffer(pattern: 'checkstyle.xml')
-					)
-				}	
+				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
 			}
 		}
-
 		// stage('Run sonar qube'){
 		// 	agent {
 		// 		docker {
