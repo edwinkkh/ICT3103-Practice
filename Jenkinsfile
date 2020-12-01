@@ -39,7 +39,9 @@ pipeline {
 				dependencyCheck additionalArguments: '--format HTML --format XML', odcInstallation: 'Default'
 			}
 			post {
-				dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+				success {
+					dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+				}
 			}
 		}
 		// stage('Run sonar qube'){
